@@ -1,0 +1,20 @@
+# Helm values overrides for kube-prometheus-stack (chart 84.5.0).
+
+# Existing Grafana (grafana-1777830317) is managed separately — disable bundled one.
+grafana:
+  enabled: false
+
+# Trim resources for local minikube.
+prometheus:
+  prometheusSpec:
+    retention: 7d
+    resources:
+      requests:
+        memory: 400Mi
+        cpu: 100m
+      limits:
+        memory: 1Gi
+
+# Skip alertmanager for local dev; flip enabled: true to bring it back.
+alertmanager:
+  enabled: false
