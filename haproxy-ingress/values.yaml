@@ -1,1 +1,8 @@
-# Helm values overrides for kubernetes-ingress (chart 1.49.0). Empty = chart defaults.
+# Helm values overrides for kubernetes-ingress (chart 1.49.0).
+
+# Original install used LoadBalancer (chart default is NodePort).
+# Required so `minikube tunnel` can publish the controller at 127.0.0.1
+# and host-file entries like `grafana.local -> 127.0.0.1` resolve.
+controller:
+  service:
+    type: LoadBalancer
