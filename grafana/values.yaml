@@ -1,1 +1,14 @@
-# Helm values overrides for grafana (chart 10.5.15). Empty = chart defaults.
+# Helm values overrides for grafana (chart 10.5.15).
+
+# Use an externally-managed Secret for admin credentials so that ArgoCD's
+# `helm template` (which can't run Helm's `lookup` to reuse the live password)
+# does not regenerate a random password on every sync.
+# The `grafana-admin` Secret is applied to the cluster directly via kubectl,
+# never committed to Git. Rotate with:
+#   kubectl -n default create secret generic grafana-admin \
+#     --from-literal=admin-user=admin --from-literal=admin-password=<new> \
+#     --dry-run=client -o yaml | kubectl apply -f -
+admin:
+  existingSecret: grafana-admin
+  userKey: admin-user
+  passwordKey: admin-password
