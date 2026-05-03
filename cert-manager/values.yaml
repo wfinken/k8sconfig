@@ -1,0 +1,26 @@
+# Helm values overrides for cert-manager (chart v1.20.2).
+
+# Bundle CRDs (ClusterIssuer, Certificate, CertificateRequest, etc.) with the chart
+# so ArgoCD applies them as part of this Application — necessary before the
+# cert-manager-issuers Application can succeed.
+crds:
+  enabled: true
+  keep: true
+
+# Trim resources for local minikube.
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+
+webhook:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+cainjector:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
