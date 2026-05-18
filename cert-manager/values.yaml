@@ -7,7 +7,7 @@ crds:
   enabled: true
   keep: true
 
-# Trim resources for local minikube.
+# Trim resources for local k3s.
 resources:
   requests:
     cpu: 10m

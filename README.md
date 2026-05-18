@@ -1,12 +1,12 @@
 # k8sconfig
 
-GitOps source of truth for the local minikube cluster, driven by ArgoCD.
+GitOps source of truth for the local k3s cluster, driven by ArgoCD.
 
 ## Layout
 
 - `bootstrap/` — one-time install: repo credentials Secret + root Application
 - `apps/` — child Applications (one file per managed app)
-- `grafana/`, `haproxy-ingress/` — Helm values overrides per app
+- `grafana/`, `prometheus/` — Helm values overrides per app
 - `manifests/` — placeholder for future Kustomize-based apps
 
 ArgoCD watches `apps/` (app-of-apps). Adding a new `apps/<name>.yaml` and
@@ -48,16 +48,15 @@ after first login.
 In the UI:
 - **Settings → Repositories** — verify `github.com/wfinken/k8sconfig` is
   reachable.
-- **Applications** — `root` should appear and fan out to `grafana` and
-  `haproxy-ingress`. All three should reach **Synced / Healthy**.
+- **Applications** — `root` should appear and fan out to `grafana`, `prometheus`, etc.
+  All should reach **Synced / Healthy**.
 
 ## Adopted releases
 
-The `grafana` and `haproxy-ingress` Applications match the existing Helm
-release names (`grafana-1777830317`, `kubernetes-ingress-1777830932`) so
-ArgoCD takes them over in place — no pod recreation expected.
+The `grafana` and `prometheus` Applications match the existing Helm
+release names so ArgoCD takes them over in place.
 
-| App     | Chart                          | Version | Namespace |
-|---------|--------------------------------|---------|-----------|
-| grafana | grafana/grafana                | 10.5.15 | default   |
-| haproxy | haproxytech/kubernetes-ingress | 1.49.0  | default   |
+| App        | Chart                                | Version | Namespace  |
+|------------|--------------------------------------|---------|------------|
+| grafana    | grafana/grafana                      | 10.5.15 | default    |
+| prometheus | prometheus-community/prometheus      | 84.5.0  | monitoring |
