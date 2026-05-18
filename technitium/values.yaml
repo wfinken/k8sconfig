@@ -1,6 +1,5 @@
 # technitium/values.yaml
-# Resolved port conflict by removing Port 80 from the LoadBalancer service.
-# The Web UI will be accessed exclusively via Traefik Ingress.
+# Explicitly disabling all ports that conflict with Traefik or are unused.
 
 service:
   main:
@@ -8,8 +7,7 @@ service:
     primary: true
     type: LoadBalancer
     ports:
-      # Port 80 removed here to avoid conflict with Traefik on k3d nodes.
-      # The chart still creates the ClusterIP/internal port needed for Ingress.
+      # DNS (TCP/UDP) - These are the only ports we want to expose via LoadBalancer
       dns-udp:
         enabled: true
         port: 53
@@ -20,6 +18,22 @@ service:
         port: 53
         protocol: TCP
         targetPort: 53
+      
+      # Web UI - Keep the internal port for Ingress but DISABLE the service port exposure
+      # by setting enabled: false or changing the port. 
+      # Actually, to use Ingress, we need an internal port. 
+      # The chart uses port 5380 internally. 
+      # We disable the LoadBalancer exposure of 80/443.
+      http:
+        enabled: false
+      https:
+        enabled: false
+      dhcp:
+        enabled: false
+      dot:
+        enabled: false
+      doh-reverse:
+        enabled: false
 
 ingress:
   main:
@@ -30,6 +44,10 @@ ingress:
         paths:
           - path: /
             pathType: Prefix
+    # Point ingress to the internal Technitium port
+    service:
+      name: main
+      port: 5380
 
 persistence:
   config:
