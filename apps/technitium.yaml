@@ -9,8 +9,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://obeone.github.io/charts
-    targetRevision: 2.1.2 # Adjust to the latest chart version
+    repoURL: https://charts.obeone.cloud
+    targetRevision: 1.10.0
     chart: technitium-dnsserver
     helm:
       valueFiles:
