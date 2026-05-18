@@ -4,8 +4,16 @@
 grafana:
   enabled: false
 
-# Trim resources for local minikube.
+# Trim resources for local k3s.
 prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hosts:
+      - prometheus.local
+    paths:
+      - /
+    pathType: Prefix
   prometheusSpec:
     retention: 7d
     resources:
