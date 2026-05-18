@@ -1,19 +1,16 @@
 # technitium/values.yaml
+# Strictly following the k8s-at-home common library v4.5.2 structure
+
 service:
-  # Main service for the Web Management Console (Port 5380)
   main:
     enabled: true
-    type: ClusterIP
+    primary: true
+    type: LoadBalancer
     ports:
       http:
-        port: 5380
-
-  # Dedicated service for DNS traffic (UDP and TCP)
-  dns:
-    enabled: true
-    type: LoadBalancer
-    # externalTrafficPolicy: Local
-    ports:
+        enabled: true
+        port: 80
+        targetPort: 5380
       dns-udp:
         enabled: true
         port: 53
@@ -25,20 +22,21 @@ service:
         protocol: TCP
         targetPort: 53
 
-# Enable persistent storage for config and zones
-persistence:
-  config:
-    enabled: true
-    size: 1Gi
-    mountPath: /etc/dns/config
-
-# Expose the Web UI via Traefik Ingress
 ingress:
   main:
     enabled: true
-    className: "traefik"
+    ingressClassName: "traefik"
+    annotations: {}
     hosts:
       - host: dns.local
         paths:
           - path: /
             pathType: Prefix
+    tls: []
+
+persistence:
+  config:
+    enabled: true
+    type: pvc
+    size: 1Gi
+    mountPath: /etc/dns
