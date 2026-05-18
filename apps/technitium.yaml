@@ -8,13 +8,16 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://charts.obeone.cloud
-    targetRevision: 1.10.0
-    chart: technitium-dnsserver
-    helm:
-      valueFiles:
-        - https://raw.githubusercontent.com/wfinken/k8sconfig/main/technitium/values.yaml
+  sources:
+    - repoURL: https://charts.obeone.cloud
+      chart: technitium-dnsserver
+      targetRevision: 1.10.0
+      helm:
+        valueFiles:
+          - $values/technitium/values.yaml
+    - repoURL: https://github.com/wfinken/k8sconfig.git
+      targetRevision: main
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: technitium

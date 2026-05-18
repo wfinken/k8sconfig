@@ -1,7 +1,9 @@
-# technitium/values.yaml - NO INGRESS VERSION
+# technitium/values.yaml
+# Complete configuration with Ingress and Persistence restored
 service:
   main:
     enabled: true
+    primary: true
     type: LoadBalancer
     ports:
       http:
@@ -19,9 +21,19 @@ service:
         protocol: TCP
         targetPort: 53
 
-# Removed ingress block entirely to avoid template error
-# The chart defaults should keep it disabled.
+ingress:
+  main:
+    enabled: true
+    ingressClassName: "traefik"
+    hosts:
+      - host: dns.local
+        paths:
+          - path: /
+            pathType: Prefix
 
 persistence:
   config:
-    enabled: false
+    enabled: true
+    type: pvc
+    size: 1Gi
+    mountPath: /etc/dns
