@@ -1,0 +1,26 @@
+# apps/technitium.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: technitium
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://obeone.github.io/charts
+    targetRevision: 2.1.2 # Adjust to the latest chart version
+    chart: technitium-dnsserver
+    helm:
+      valueFiles:
+        - https://raw.githubusercontent.com/wfinken/k8sconfig/main/technitium/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: technitium
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

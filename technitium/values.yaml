@@ -1,0 +1,23 @@
+# technitium/values.yaml
+service:
+  dns:
+    type: LoadBalancer
+  # The web UI service remains ClusterIP
+  http:
+    type: ClusterIP
+
+# Enable persistent storage for config and zones
+persistence:
+  config:
+    enabled: true
+    size: 1Gi
+
+# Expose the Web UI via Traefik Ingress
+ingress:
+  enabled: true
+  className: "traefik"
+  hosts:
+    - host: dns.local # Replace with your desired local domain
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
