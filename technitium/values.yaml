@@ -1,10 +1,7 @@
-# technitium/values.yaml
-# Strictly following the k8s-at-home common library v4.5.2 structure
-
+# technitium/values.yaml - MINIMAL TEST VERSION
 service:
   main:
     enabled: true
-    primary: true
     type: LoadBalancer
     ports:
       http:
@@ -22,21 +19,11 @@ service:
         protocol: TCP
         targetPort: 53
 
+# Disabling ingress entirely to see if manifest generation succeeds
 ingress:
   main:
-    enabled: true
-    ingressClassName: "traefik"
-    annotations: {}
-    hosts:
-      - host: dns.local
-        paths:
-          - path: /
-            pathType: Prefix
-    tls: []
+    enabled: false
 
 persistence:
   config:
-    enabled: true
-    type: pvc
-    size: 1Gi
-    mountPath: /etc/dns
+    enabled: false
