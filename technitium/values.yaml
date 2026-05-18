@@ -1,4 +1,4 @@
-# technitium/values.yaml - MINIMAL TEST VERSION
+# technitium/values.yaml - NO INGRESS VERSION
 service:
   main:
     enabled: true
@@ -19,10 +19,8 @@ service:
         protocol: TCP
         targetPort: 53
 
-# Disabling ingress entirely to see if manifest generation succeeds
-ingress:
-  main:
-    enabled: false
+# Removed ingress block entirely to avoid template error
+# The chart defaults should keep it disabled.
 
 persistence:
   config:
