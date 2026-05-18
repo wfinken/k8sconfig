@@ -1,23 +1,44 @@
 # technitium/values.yaml
 service:
-  dns:
-    type: LoadBalancer
-  # The web UI service remains ClusterIP
-  http:
+  # Main service for the Web Management Console (Port 5380)
+  main:
+    enabled: true
     type: ClusterIP
+    ports:
+      http:
+        port: 5380
+
+  # Dedicated service for DNS traffic (UDP and TCP)
+  dns:
+    enabled: true
+    type: LoadBalancer
+    # externalTrafficPolicy: Local
+    ports:
+      dns-udp:
+        enabled: true
+        port: 53
+        protocol: UDP
+        targetPort: 53
+      dns-tcp:
+        enabled: true
+        port: 53
+        protocol: TCP
+        targetPort: 53
 
 # Enable persistent storage for config and zones
 persistence:
   config:
     enabled: true
     size: 1Gi
+    mountPath: /etc/dns/config
 
 # Expose the Web UI via Traefik Ingress
 ingress:
-  enabled: true
-  className: "traefik"
-  hosts:
-    - host: dns.local # Replace with your desired local domain
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
+  main:
+    enabled: true
+    className: "traefik"
+    hosts:
+      - host: dns.local
+        paths:
+          - path: /
+            pathType: Prefix
