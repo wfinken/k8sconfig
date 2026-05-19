@@ -39,7 +39,7 @@ config:
     headerStyle: clean
     statusStyle: dot
     background:
-      image: https://w.wallhaven.cc/full/5y/wallhaven-5yd6d5.jpg
+      image: https://w.wallhaven.cc/full/5y/wallhaven-5yd6d5.png
       blur: sm
       saturate: 70
       brightness: 40
