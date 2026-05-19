@@ -47,6 +47,10 @@ config:
         style: row
         columns: 2
         icon: mdi-chart-line
+      Apps:
+        style: row
+        columns: 2
+        icon: mdi-apps
       Bookmarks:
         style: row
         columns: 4
@@ -113,6 +117,14 @@ config:
             widget:
               type: prometheus
               url: http://prometheus-operated.monitoring.svc.cluster.local:9090
+
+    - Apps:
+        - Memos:
+            href: https://memos.wfink.cc
+            description: Notes & Memos
+            icon: memos.png
+            namespace: memos
+            app: memos
 
   bookmarks:
     - Code:
