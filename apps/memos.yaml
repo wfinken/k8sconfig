@@ -11,9 +11,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: memos
   sources:
-    - repoURL: https://usememos.github.io/helm/
-      chart: memos
-      targetRevision: 0.2.1
+    - repoURL: https://github.com/usememos/helm
+      targetRevision: HEAD
+      path: .
       helm:
         releaseName: memos
         valueFiles:
