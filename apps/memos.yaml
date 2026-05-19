@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: memos
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: memos
+  sources:
+    - repoURL: https://usememos.github.io/helm/
+      chart: memos
+      targetRevision: 0.2.1
+      helm:
+        releaseName: memos
+        valueFiles:
+          - $values/memos/values.yaml
+    - repoURL: https://github.com/wfinken/k8sconfig
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
