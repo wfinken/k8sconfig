@@ -1,0 +1,124 @@
+# jameswynn/homepage Helm chart values (chart 2.1.0)
+
+enableRbac: true
+
+serviceAccount:
+  create: true
+  name: homepage
+
+env:
+  - name: HOMEPAGE_ALLOWED_HOSTS
+    value: homepage.local
+
+ingress:
+  main:
+    enabled: true
+    className: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: "selfsigned-issuer"
+      traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: homepage.local
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: homepage-tls
+        hosts:
+          - homepage.local
+
+config:
+  kubernetes:
+    mode: cluster
+
+  settings:
+    title: Homelab
+    theme: dark
+    color: slate
+    headerStyle: boxed
+    statusStyle: dot
+    layout:
+      Infrastructure:
+        style: row
+        columns: 4
+        icon: mdi-server-network
+      Monitoring:
+        style: row
+        columns: 2
+        icon: mdi-chart-line
+      Bookmarks:
+        style: row
+        columns: 4
+        icon: mdi-bookmark-outline
+
+  widgets:
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+          label: homelab
+        nodes:
+          show: true
+          cpu: true
+          memory: true
+          showLabel: true
+    - datetime:
+        text_size: xl
+        format:
+          timeStyle: short
+          dateStyle: medium
+          hour12: false
+    - search:
+        provider: duckduckgo
+        target: _blank
+        focus: false
+
+  services:
+    - Infrastructure:
+        - ArgoCD:
+            href: https://argocd.local
+            description: GitOps Continuous Delivery
+            icon: argocd.png
+            namespace: argocd
+            app: argocd-server
+        - Technitium:
+            href: http://dns.local:5380
+            description: Internal DNS Server
+            icon: technitium-dns-server.png
+            namespace: technitium
+            app: technitium-dnsserver
+        - cert-manager:
+            href: https://argocd.local/applications/argocd/cert-manager
+            description: TLS Certificate Management
+            icon: cert-manager.png
+            namespace: cert-manager
+            app: cert-manager
+
+    - Monitoring:
+        - Grafana:
+            href: https://grafana.local
+            description: Dashboards & Visualization
+            icon: grafana.png
+            namespace: default
+            app: grafana
+        - Prometheus:
+            href: https://prometheus.local
+            description: Metrics & Alerting
+            icon: prometheus.png
+            namespace: monitoring
+            app: prometheus
+            widget:
+              type: prometheus
+              url: http://prometheus-operated.monitoring.svc.cluster.local:9090
+
+  bookmarks:
+    - Code:
+        - k8sconfig:
+            abbr: K8
+            href: https://github.com/wfinken/k8sconfig
+        - GitHub:
+            abbr: GH
+            href: https://github.com/wfinken
