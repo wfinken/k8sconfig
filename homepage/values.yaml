@@ -35,13 +35,19 @@ config:
   settings:
     title: Homelab
     theme: dark
-    color: slate
-    headerStyle: boxed
+    color: stone
+    headerStyle: clean
     statusStyle: dot
+    background:
+      image: https://w.wallhaven.cc/full/5y/wallhaven-5yd6d5.jpg
+      blur: sm
+      saturate: 70
+      brightness: 40
+      opacity: 95
     layout:
       Infrastructure:
         style: row
-        columns: 4
+        columns: 3
         icon: mdi-server-network
       Monitoring:
         style: row
@@ -53,8 +59,171 @@ config:
         icon: mdi-apps
       Bookmarks:
         style: row
-        columns: 4
+        columns: 2
         icon: mdi-bookmark-outline
+
+  custom.css: |
+    /* === Gruvbox Dark Theme === */
+    :root {
+      --gb-bg:     #282828;
+      --gb-bg-s:   #32302f;
+      --gb-bg1:    #3c3836;
+      --gb-bg2:    #504945;
+      --gb-bg3:    #665c54;
+      --gb-bg4:    #7c6f64;
+      --gb-fg:     #ebdbb2;
+      --gb-fg1:    #d5c4a1;
+      --gb-fg2:    #bdae93;
+      --gb-fg3:    #a89984;
+      --gb-yellow: #fabd2f;
+      --gb-orange: #fe8019;
+      --gb-red:    #fb4934;
+      --gb-green:  #b8bb26;
+      --gb-aqua:   #8ec07c;
+      --gb-blue:   #83a598;
+      --gb-purple: #d3869b;
+    }
+
+    /* --- Service cards --- */
+    .service-card {
+      background: rgba(60, 56, 54, 0.82) !important;
+      border: 1px solid rgba(80, 73, 69, 0.55) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
+    }
+
+    .service-card:hover {
+      background: rgba(80, 73, 69, 0.90) !important;
+      border-color: rgba(250, 189, 47, 0.50) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    /* --- Top widgets (kubernetes, datetime, search) --- */
+    #widgets-wrap > div > div,
+    .information-widget-base {
+      background: rgba(60, 56, 54, 0.82) !important;
+      border: 1px solid rgba(80, 73, 69, 0.55) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+    }
+
+    /* --- Section group labels --- */
+    #services h2,
+    #bookmarks h2 {
+      color: var(--gb-yellow) !important;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.70rem !important;
+      font-weight: 600 !important;
+    }
+
+    /* --- Service name --- */
+    .service-title,
+    .service-card .text-theme-800,
+    .service-card [class*="text-theme-800"] {
+      color: var(--gb-fg) !important;
+    }
+
+    /* --- Service description --- */
+    .service-description,
+    .service-card .text-theme-500,
+    .service-card [class*="text-theme-500"] {
+      color: var(--gb-fg3) !important;
+    }
+
+    /* --- Status dots --- */
+    .service-card .online,
+    .service-card [class*="online"] {
+      color: var(--gb-green) !important;
+    }
+    .service-card .offline,
+    .service-card [class*="offline"] {
+      color: var(--gb-red) !important;
+    }
+    .service-card .warning,
+    .service-card [class*="warning"] {
+      color: var(--gb-yellow) !important;
+    }
+
+    /* --- Search bar --- */
+    #searchbox input,
+    input[type="text"][placeholder*="Search"],
+    input[type="search"] {
+      background: rgba(60, 56, 54, 0.82) !important;
+      border: 1px solid rgba(80, 73, 69, 0.55) !important;
+      color: var(--gb-fg) !important;
+      backdrop-filter: blur(10px) !important;
+    }
+
+    #searchbox input::placeholder {
+      color: var(--gb-fg3) !important;
+    }
+
+    #searchbox input:focus {
+      border-color: rgba(250, 189, 47, 0.60) !important;
+      outline: none !important;
+      box-shadow: 0 0 0 2px rgba(250, 189, 47, 0.15) !important;
+    }
+
+    /* --- Bookmark cards --- */
+    #bookmarks .bookmark,
+    #bookmarks li > a,
+    #bookmarks li > div {
+      background: rgba(60, 56, 54, 0.82) !important;
+      border: 1px solid rgba(80, 73, 69, 0.55) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      transition: background 0.2s ease, border-color 0.2s ease !important;
+    }
+
+    #bookmarks .bookmark:hover,
+    #bookmarks li > a:hover {
+      background: rgba(80, 73, 69, 0.90) !important;
+      border-color: rgba(142, 192, 124, 0.50) !important;
+    }
+
+    #bookmarks abbr {
+      color: var(--gb-aqua) !important;
+      font-weight: 700 !important;
+    }
+
+    #bookmarks span,
+    #bookmarks .bookmark-name {
+      color: var(--gb-fg2) !important;
+    }
+
+    /* --- Widget text --- */
+    #widgets-wrap .text-theme-700,
+    #widgets-wrap [class*="text-theme-700"] {
+      color: var(--gb-fg) !important;
+    }
+
+    #widgets-wrap .text-theme-500,
+    #widgets-wrap [class*="text-theme-500"] {
+      color: var(--gb-fg3) !important;
+    }
+
+    /* --- Kubernetes cluster label --- */
+    #widgets-wrap .cluster-label,
+    #widgets-wrap [class*="label"] {
+      color: var(--gb-yellow) !important;
+    }
+
+    /* --- Scrollbar --- */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--gb-bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--gb-bg3);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gb-bg4);
+    }
 
   widgets:
     - kubernetes:
