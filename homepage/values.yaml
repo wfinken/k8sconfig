@@ -117,8 +117,8 @@ config:
   bookmarks:
     - Code:
         - k8sconfig:
-            abbr: K8
-            href: https://github.com/wfinken/k8sconfig
+            - abbr: K8
+              href: https://github.com/wfinken/k8sconfig
         - GitHub:
-            abbr: GH
-            href: https://github.com/wfinken
+            - abbr: GH
+              href: https://github.com/wfinken
