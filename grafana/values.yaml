@@ -17,14 +17,14 @@ ingress:
   enabled: true
   ingressClassName: traefik
   annotations:
-    cert-manager.io/cluster-issuer: "selfsigned-issuer"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
     traefik.ingress.kubernetes.io/router.tls: "true"
   hosts:
-    - grafana.local
+    - grafana.wfink.cc
   tls:
     - secretName: grafana-tls
       hosts:
-        - grafana.local
+        - grafana.wfink.cc
   path: /
   pathType: Prefix

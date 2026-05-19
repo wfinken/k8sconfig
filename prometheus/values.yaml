@@ -10,12 +10,18 @@ prometheus:
     enabled: true
     ingressClassName: traefik
     annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
       traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+      traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
-      - prometheus.local
+      - prometheus.wfink.cc
     paths:
       - /
     pathType: Prefix
+    tls:
+      - secretName: prometheus-tls
+        hosts:
+          - prometheus.wfink.cc
   prometheusSpec:
     retention: 7d
     resources:

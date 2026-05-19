@@ -4,7 +4,7 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
   annotations:
-    cert-manager.io/cluster-issuer: "selfsigned-issuer"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
     traefik.ingress.kubernetes.io/router.tls: "true"
     # This is critical: tells Traefik to use HTTP to talk to the backend
@@ -12,7 +12,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: argocd.local
+  - host: argocd.wfink.cc
     http:
       paths:
       - path: /
@@ -24,5 +24,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - argocd.local
+    - argocd.wfink.cc
     secretName: argocd-server-tls
