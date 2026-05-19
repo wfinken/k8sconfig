@@ -28,3 +28,7 @@ ingress:
         - grafana.wfink.cc
   path: /
   pathType: Prefix
+
+persistence:
+  enabled: true
+  size: 1Gi
