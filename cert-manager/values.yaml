@@ -7,6 +7,12 @@ crds:
   enabled: true
   keep: true
 
+# Use public DNS for DNS-01 propagation checks instead of cluster-internal DNS,
+# which returns SERVFAIL for external zones like wfink.cc.
+extraArgs:
+  - --dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53
+  - --dns01-recursive-nameservers-only
+
 # Trim resources for local k3s.
 resources:
   requests:
