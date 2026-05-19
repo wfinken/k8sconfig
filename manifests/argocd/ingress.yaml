@@ -5,10 +5,10 @@ metadata:
   namespace: argocd
   annotations:
     cert-manager.io/cluster-issuer: "selfsigned-issuer"
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
     traefik.ingress.kubernetes.io/router.tls: "true"
-    # ArgoCD needs this because it serves its own TLS by default
-    traefik.ingress.kubernetes.io/service.serversscheme: https
+    # This is critical: tells Traefik to use HTTP to talk to the backend
+    traefik.ingress.kubernetes.io/service.serversscheme: http
 spec:
   ingressClassName: traefik
   rules:
@@ -21,7 +21,7 @@ spec:
           service:
             name: argocd-server
             port:
-              name: https
+              number: 80
   tls:
   - hosts:
     - argocd.local
