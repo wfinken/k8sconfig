@@ -81,13 +81,13 @@ config:
         - ArgoCD:
             href: https://argocd.local
             description: GitOps Continuous Delivery
-            icon: argocd.png
+            icon: argo-cd.png
             namespace: argocd
             app: argocd-server
         - Technitium:
             href: http://dns.local:5380
             description: Internal DNS Server
-            icon: technitium-dns-server.png
+            icon: technitium.png
             namespace: technitium
             app: technitium-dnsserver
         - cert-manager:
