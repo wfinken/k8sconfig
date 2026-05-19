@@ -303,3 +303,6 @@ config:
         - GitHub:
             - abbr: GH
               href: https://github.com/wfinken
+        - Halon Github:
+            - abbr: HG
+              href: https://github.com/halon
