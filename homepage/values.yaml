@@ -85,7 +85,7 @@ config:
             namespace: argocd
             app: argocd-server
         - Technitium:
-            href: http://dns.local:5380
+            href: http://dns.local
             description: Internal DNS Server
             icon: technitium.png
             namespace: technitium
