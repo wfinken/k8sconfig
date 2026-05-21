@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-music
+spec:
+  capacity:
+    storage: 1Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  nfs:
+    server: 172.22.0.1
+    path: /Volumes/Storage/Media/Music
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-music-library
+spec:
+  capacity:
+    storage: 1Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  nfs:
+    server: 172.22.0.1
+    path: /Volumes/Storage/Media/Music/library
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-music-ingest
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  nfs:
+    server: 172.22.0.1
+    path: /Volumes/Storage/Media/Music/ingest

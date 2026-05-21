@@ -54,8 +54,7 @@ persistence:
     globalMounts:
       - path: /config
   downloads:
-    type: hostPath
-    hostPath: /Volumes/Storage/Media/Music/ingest
-    hostPathType: DirectoryOrCreate
+    type: persistentVolumeClaim
+    existingClaim: nfs-music-ingest
     globalMounts:
       - path: /downloads

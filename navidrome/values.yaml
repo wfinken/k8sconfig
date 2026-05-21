@@ -47,8 +47,7 @@ persistence:
     globalMounts:
       - path: /data
   music:
-    type: hostPath
-    hostPath: /Volumes/Storage/Media/Music
-    hostPathType: Directory
+    type: persistentVolumeClaim
+    existingClaim: nfs-music
     globalMounts:
       - path: /music
