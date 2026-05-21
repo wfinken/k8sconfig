@@ -9,6 +9,9 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
+  mountOptions:
+    - nolock
+    - nfsvers=3
   csi:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-music
@@ -27,6 +30,9 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
+  mountOptions:
+    - nolock
+    - nfsvers=3
   csi:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-music-library
@@ -45,6 +51,9 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
+  mountOptions:
+    - nolock
+    - nfsvers=3
   csi:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-music-ingest
