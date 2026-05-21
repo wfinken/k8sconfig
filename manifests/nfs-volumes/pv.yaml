@@ -15,7 +15,7 @@ spec:
     volumeAttributes:
       server: 172.22.0.1
       share: /Volumes/Storage/Media/Music
-      mountOptions: nolock,nfsvers=3
+      mountOptions: nfsvers=4
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -34,7 +34,7 @@ spec:
     volumeAttributes:
       server: 172.22.0.1
       share: /Volumes/Storage/Media/Music/library
-      mountOptions: nolock,nfsvers=3
+      mountOptions: nfsvers=4
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -53,4 +53,4 @@ spec:
     volumeAttributes:
       server: 172.22.0.1
       share: /Volumes/Storage/Media/Music/ingest
-      mountOptions: nolock,nfsvers=3
+      mountOptions: nfsvers=4
