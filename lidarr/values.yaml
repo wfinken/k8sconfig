@@ -45,12 +45,12 @@ persistence:
     size: 2Gi
     globalMounts:
       - path: /config
-  music:
+  library:
     type: hostPath
-    hostPath: /Volumes/Storage/Media/Music
-    hostPathType: Directory
+    hostPath: /Volumes/Storage/Media/Music/library
+    hostPathType: DirectoryOrCreate
     globalMounts:
-      - path: /music
+      - path: /library
   ingest:
     type: hostPath
     hostPath: /Volumes/Storage/Media/Music/ingest
