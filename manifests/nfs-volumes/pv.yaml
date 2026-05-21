@@ -9,15 +9,13 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
-  mountOptions:
-    - nolock
-    - nfsvers=3
   csi:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-music
     volumeAttributes:
       server: 172.22.0.1
       share: /Volumes/Storage/Media/Music
+      mountOptions: nolock,nfsvers=3
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -30,15 +28,13 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
-  mountOptions:
-    - nolock
-    - nfsvers=3
   csi:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-music-library
     volumeAttributes:
       server: 172.22.0.1
       share: /Volumes/Storage/Media/Music/library
+      mountOptions: nolock,nfsvers=3
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -51,12 +47,10 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
-  mountOptions:
-    - nolock
-    - nfsvers=3
   csi:
     driver: nfs.csi.k8s.io
     volumeHandle: nfs-music-ingest
     volumeAttributes:
       server: 172.22.0.1
       share: /Volumes/Storage/Media/Music/ingest
+      mountOptions: nolock,nfsvers=3
