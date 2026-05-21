@@ -306,6 +306,12 @@ config:
             icon: navidrome.png
             namespace: media
             app: navidrome
+        - slskd:
+            href: https://slskd.wfink.cc
+            description: Soulseek Download Client
+            icon: slskd.png
+            namespace: media
+            app: slskd
 
   bookmarks:
     - Code:
