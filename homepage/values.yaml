@@ -294,6 +294,18 @@ config:
             icon: memos.png
             namespace: memos
             app: memos
+        - Lidarr:
+            href: https://lidarr.wfink.cc
+            description: Music Collection Manager
+            icon: lidarr.png
+            namespace: media
+            app: lidarr
+        - Navidrome:
+            href: https://navidrome.wfink.cc
+            description: Music Streaming Server
+            icon: navidrome.png
+            namespace: media
+            app: navidrome
 
   bookmarks:
     - Code:
