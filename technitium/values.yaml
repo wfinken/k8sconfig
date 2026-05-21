@@ -1,5 +1,7 @@
 # technitium/values.yaml
 # Updated to ensure port 5380 is available for the Web UI
+priorityClassName: dns-critical
+
 service:
   main:
     enabled: true
