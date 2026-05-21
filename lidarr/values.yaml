@@ -1,0 +1,59 @@
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          repository: ghcr.io/linuxserver/lidarr
+          tag: latest
+        env:
+          PUID: "1000"
+          PGID: "1000"
+          TZ: "America/New_York"
+
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 8686
+
+ingress:
+  main:
+    className: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: lidarr.wfink.cc
+        paths:
+          - path: /
+            pathType: Prefix
+            service:
+              identifier: main
+              port: http
+    tls:
+      - secretName: lidarr-tls
+        hosts:
+          - lidarr.wfink.cc
+
+persistence:
+  config:
+    type: persistentVolumeClaim
+    storageClass: local-path
+    accessMode: ReadWriteOnce
+    size: 2Gi
+    globalMounts:
+      - path: /config
+  music:
+    type: hostPath
+    hostPath: /Volumes/Storage/Media/Music
+    hostPathType: Directory
+    globalMounts:
+      - path: /music
+  ingest:
+    type: hostPath
+    hostPath: /Volumes/Storage/Media/Music/ingest
+    hostPathType: DirectoryOrCreate
+    globalMounts:
+      - path: /downloads

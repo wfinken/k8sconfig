@@ -1,0 +1,54 @@
+controllers:
+  main:
+    containers:
+      main:
+        image:
+          repository: deluan/navidrome
+          tag: latest
+        env:
+          ND_MUSICFOLDER: /music
+          ND_DATAFOLDER: /data
+          ND_LOGLEVEL: info
+          ND_SESSIONTIMEOUT: 24h
+
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 4533
+
+ingress:
+  main:
+    className: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: navidrome.wfink.cc
+        paths:
+          - path: /
+            pathType: Prefix
+            service:
+              identifier: main
+              port: http
+    tls:
+      - secretName: navidrome-tls
+        hosts:
+          - navidrome.wfink.cc
+
+persistence:
+  data:
+    type: persistentVolumeClaim
+    storageClass: local-path
+    accessMode: ReadWriteOnce
+    size: 2Gi
+    globalMounts:
+      - path: /data
+  music:
+    type: hostPath
+    hostPath: /Volumes/Storage/Media/Music
+    hostPathType: Directory
+    globalMounts:
+      - path: /music
