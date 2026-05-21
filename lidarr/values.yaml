@@ -4,7 +4,7 @@ controllers:
       main:
         image:
           repository: ghcr.io/linuxserver/lidarr
-          tag: latest
+          tag: plugins
         env:
           PUID: "501"
           PGID: "20"
