@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: lidarr-scan
+  namespace: media
+spec:
+  schedule: "*/5 * * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: lidarr-scan
+              image: curlimages/curl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  curl -sf -X POST "http://lidarr.media.svc.cluster.local:8686/api/v1/command" \
+                    -H "Content-Type: application/json" \
+                    -H "X-Api-Key: $LIDARR_API_KEY" \
+                    -d '{"name":"DownloadedAlbumsScan"}'
+              env:
+                - name: LIDARR_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: lidarr-api-key
+                      key: api-key
