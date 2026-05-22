@@ -1,6 +1,6 @@
 persistence:
   enabled: true
-  existingClaim: app-memos-data
+  existPersistClaim: app-memos-data
 
 ingress:
   enabled: true
