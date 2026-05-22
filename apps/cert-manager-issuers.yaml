@@ -16,8 +16,6 @@ spec:
     repoURL: https://github.com/wfinken/k8sconfig
     targetRevision: HEAD
     path: manifests/cert-manager-issuers
-    directory:
-      recurse: false
   syncPolicy:
     automated:
       prune: true
