@@ -60,5 +60,5 @@ persistence:
   config:
     enabled: true
     type: pvc
-    size: 1Gi
+    existingClaim: app-technitium-config
     mountPath: /etc/dns

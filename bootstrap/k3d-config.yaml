@@ -1,0 +1,35 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: homecluster
+servers: 1
+agents: 1
+kubeAPI:
+  hostIP: "0.0.0.0"
+  hostPort: "6443"
+volumes:
+  - volume: /Volumes/Storage:/Volumes/Storage
+    nodeFilters:
+      - all
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 443:443
+    nodeFilters:
+      - loadbalancer
+  - port: 53:53/tcp
+    nodeFilters:
+      - loadbalancer
+  - port: 53:53/udp
+    nodeFilters:
+      - loadbalancer
+  - port: 2234:2234/tcp
+    nodeFilters:
+      - loadbalancer
+options:
+  k3s:
+    extraArgs:
+      - arg: --tls-san=192.168.2.20
+        nodeFilters:
+          - server:*

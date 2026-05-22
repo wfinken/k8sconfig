@@ -40,9 +40,7 @@ ingress:
 persistence:
   config:
     type: persistentVolumeClaim
-    storageClass: local-path
-    accessMode: ReadWriteOnce
-    size: 2Gi
+    existingClaim: app-lidarr-config
     globalMounts:
       - path: /config
   library:

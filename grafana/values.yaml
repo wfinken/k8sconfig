@@ -31,4 +31,4 @@ ingress:
 
 persistence:
   enabled: true
-  size: 1Gi
+  existingClaim: app-grafana-data

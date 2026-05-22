@@ -41,9 +41,7 @@ ingress:
 persistence:
   data:
     type: persistentVolumeClaim
-    storageClass: local-path
-    accessMode: ReadWriteOnce
-    size: 2Gi
+    existingClaim: app-navidrome-data
     globalMounts:
       - path: /data
   music:
