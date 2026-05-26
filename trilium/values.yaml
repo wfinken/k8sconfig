@@ -1,0 +1,34 @@
+persistence:
+  data:
+    enabled: true
+    type: persistentVolumeClaim
+    existingClaim: app-trilium-data
+
+configini:
+  general:
+    instanceName: "wfink"
+    noAuthentication: false
+    noBackup: false
+  network:
+    host: "0.0.0.0"
+    port: 8080
+    https: false
+    trustedReverseProxy: true
+
+ingress:
+  main:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    className: traefik
+    hosts:
+      - host: trilium.wfink.cc
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: trilium-tls
+        hosts:
+          - trilium.wfink.cc

@@ -46,7 +46,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: app-memos-data
+  name: app-trilium-data
 spec:
   capacity:
     storage: 10Gi
@@ -55,7 +55,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
   hostPath:
-    path: /Volumes/Storage/k8s-data/memos/data
+    path: /Volumes/Storage/k8s-data/trilium/data
     type: DirectoryOrCreate
 ---
 apiVersion: v1

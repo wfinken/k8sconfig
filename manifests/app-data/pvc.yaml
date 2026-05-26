@@ -43,15 +43,15 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: app-memos-data
-  namespace: memos
+  name: app-trilium-data
+  namespace: trilium
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
-  volumeName: app-memos-data
+  volumeName: app-trilium-data
   storageClassName: ""
 ---
 apiVersion: v1

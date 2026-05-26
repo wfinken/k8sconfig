@@ -288,12 +288,12 @@ config:
               url: http://prometheus-operated.monitoring.svc.cluster.local:9090
 
     - Apps:
-        - Memos:
-            href: https://memos.wfink.cc
-            description: Notes & Memos
-            icon: memos.png
-            namespace: memos
-            app: memos
+        - Trilium:
+            href: https://trilium.wfink.cc
+            description: Personal Knowledge Base
+            icon: trilium.png
+            namespace: trilium
+            app: trilium
         - Lidarr:
             href: https://lidarr.wfink.cc
             description: Music Collection Manager

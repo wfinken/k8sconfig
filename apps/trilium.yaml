@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: memos
+  name: trilium
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,15 +9,15 @@ spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: memos
+    namespace: trilium
   sources:
-    - repoURL: https://github.com/usememos/helm
-      targetRevision: HEAD
-      path: .
+    - repoURL: https://triliumnext.github.io/helm-charts
+      chart: trilium
+      targetRevision: 1.3.0
       helm:
-        releaseName: memos
+        releaseName: trilium
         valueFiles:
-          - $values/memos/values.yaml
+          - $values/trilium/values.yaml
     - repoURL: https://github.com/wfinken/k8sconfig
       targetRevision: HEAD
       ref: values
