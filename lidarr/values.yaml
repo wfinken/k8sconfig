@@ -45,11 +45,11 @@ persistence:
       - path: /config
   library:
     type: persistentVolumeClaim
-    existingClaim: nfs-music-library
+    existingClaim: music-library
     globalMounts:
       - path: /library
   ingest:
     type: persistentVolumeClaim
-    existingClaim: nfs-music-ingest
+    existingClaim: music-ingest
     globalMounts:
       - path: /downloads

@@ -46,6 +46,6 @@ persistence:
       - path: /data
   music:
     type: persistentVolumeClaim
-    existingClaim: nfs-music-library
+    existingClaim: music-library
     globalMounts:
       - path: /music

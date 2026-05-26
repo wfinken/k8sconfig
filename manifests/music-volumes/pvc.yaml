@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-music
+  name: music
   namespace: media
 spec:
   accessModes:
@@ -9,13 +9,13 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  volumeName: nfs-music
+  volumeName: music
   storageClassName: ""
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-music-library
+  name: music-library
   namespace: media
 spec:
   accessModes:
@@ -23,13 +23,13 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  volumeName: nfs-music-library
+  volumeName: music-library
   storageClassName: ""
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-music-ingest
+  name: music-ingest
   namespace: media
 spec:
   accessModes:
@@ -37,5 +37,5 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  volumeName: nfs-music-ingest
+  volumeName: music-ingest
   storageClassName: ""

@@ -53,6 +53,6 @@ persistence:
       - path: /config
   downloads:
     type: persistentVolumeClaim
-    existingClaim: nfs-music-ingest
+    existingClaim: music-ingest
     globalMounts:
       - path: /downloads
