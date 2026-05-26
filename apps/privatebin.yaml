@@ -21,6 +21,9 @@ spec:
     - repoURL: https://github.com/wfinken/k8sconfig
       targetRevision: HEAD
       ref: values
+    - repoURL: https://github.com/wfinken/k8sconfig
+      targetRevision: HEAD
+      path: manifests/privatebin
   syncPolicy:
     automated:
       prune: true
