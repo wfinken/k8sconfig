@@ -51,6 +51,63 @@ In the UI:
 - **Applications** — `root` should appear and fan out to `grafana`, `prometheus`, etc.
   All should reach **Synced / Healthy**.
 
+## Migrating to OrbStack (from Docker Desktop)
+
+OrbStack is a drop-in Docker Desktop replacement. k3d works unchanged on it.
+
+### Why k3d-on-OrbStack (not OrbStack's built-in Kubernetes)
+
+- Port 53 (Technitium DNS) would conflict with OrbStack's internal DNS resolver
+- The cluster uses 1 server + 1 agent node; OrbStack k8s is single-node only
+- All `hostPath` PVs point to `/Volumes/Storage` — OrbStack auto-mounts macOS
+  volumes, so paths are identical
+
+### Migration steps
+
+```sh
+# 1. Export secrets from the RUNNING cluster (Docker Desktop)
+bash bootstrap/backup-secrets.sh
+
+# 2. Install OrbStack
+brew install --cask orbstack
+# Open OrbStack.app — it prompts to replace Docker Desktop
+
+# 3. Switch Docker context (if Docker Desktop is still installed)
+docker context use orbstack
+
+# 4. Delete the old k3d cluster
+k3d cluster delete homecluster
+
+# 5. (Optional) Quit / uninstall Docker Desktop
+
+# 6. Bring up the new cluster — also restores secrets automatically
+bash bootstrap/setup.sh
+```
+
+### Port forwarding
+
+The k3d loadbalancer binds these ports on localhost (same as Docker Desktop):
+
+| Port | Protocol | App |
+|------|----------|-----|
+| 80 | TCP | HTTP (Traefik) |
+| 443 | TCP | HTTPS (Traefik) |
+| 53 | TCP+UDP | DNS (Technitium) |
+| 2234 | TCP | Soulseek (slskd) |
+
+### Volume access
+
+All PVs use `hostPath` on `/Volumes/Storage`, which k3d bind-mounts into every
+node. OrbStack inherits macOS volume mounts automatically — no extra file-sharing
+config needed.
+
+### TLS SAN
+
+`k3d-config.yaml` sets `--tls-san=192.168.2.20`. If your local IP changes,
+update that field and recreate the cluster.
+
+---
+
 ## Adopted releases
 
 The `grafana` and `prometheus` Applications match the existing Helm

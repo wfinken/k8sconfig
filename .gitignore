@@ -1,2 +1,6 @@
 bootstrap/repo-secret.yaml
 bootstrap/cloudflare-secret.yaml
+
+# Exported secrets from backup-secrets.sh — never commit these
+secrets/*.yaml
+secrets/*.json
