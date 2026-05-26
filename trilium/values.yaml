@@ -15,6 +15,13 @@ configini:
     https: false
     trustedReverseProxy: true
 
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 8080
+
 ingress:
   main:
     enabled: true
@@ -28,6 +35,9 @@ ingress:
         paths:
           - path: /
             pathType: Prefix
+            service:
+              identifier: main
+              port: http
     tls:
       - secretName: trilium-tls
         hosts:
