@@ -312,6 +312,12 @@ config:
             icon: slskd.png
             namespace: media
             app: slskd
+        - PrivateBin:
+            href: https://privatebin.wfink.cc
+            description: Encrypted Paste Sharing
+            icon: privatebin.png
+            namespace: privatebin
+            app: privatebin
 
   bookmarks:
     - Code:

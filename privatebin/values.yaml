@@ -1,0 +1,25 @@
+ingress:
+  enabled: true
+  className: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  hosts:
+    - host: privatebin.wfink.cc
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: privatebin-tls
+      hosts:
+        - privatebin.wfink.cc
+
+extraVolumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: app-privatebin-data
+
+extraVolumeMounts:
+  - name: data
+    mountPath: /srv/data

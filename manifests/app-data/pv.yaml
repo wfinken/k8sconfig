@@ -87,3 +87,18 @@ spec:
   hostPath:
     path: /Volumes/Storage/k8s-data/grafana/data
     type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-privatebin-data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  hostPath:
+    path: /Volumes/Storage/k8s-data/privatebin/data
+    type: DirectoryOrCreate
