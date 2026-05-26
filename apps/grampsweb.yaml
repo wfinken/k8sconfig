@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: grampsweb
   sources:
-    - repoURL: oci://codeberg.org/wrenix/helm-charts
+    - repoURL: oci://codeberg.org/wrenix/helm-charts/grampsweb
       chart: grampsweb
       targetRevision: 0.2.45
       helm:
