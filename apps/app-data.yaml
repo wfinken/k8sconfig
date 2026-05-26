@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-data
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/wfinken/k8sconfig.git
+    targetRevision: HEAD
+    path: manifests/app-data
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
