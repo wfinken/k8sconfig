@@ -1,7 +1,7 @@
 controllers:
   main:
     initContainers:
-      install-slskd-plugin:
+      install-tubifarry-plugin:
         image:
           repository: alpine
           tag: "3.21"
@@ -10,10 +10,18 @@ controllers:
           - -c
           - |
             apk add --no-cache curl unzip
-            mkdir -p /config/plugins
-            curl -fsSL -o /tmp/slskd-plugin.zip \
-              "https://github.com/allquiet-hub/Lidarr.Plugin.Slskd/releases/latest/download/Lidarr.Plugin.Slskd.net6.0.zip"
-            unzip -o /tmp/slskd-plugin.zip -d /config/plugins/Lidarr.Plugin.Slskd/
+            rm -rf /config/plugins/Lidarr.Plugin.Slskd \
+                   /config/plugins/runtimes \
+                   /config/plugins/Lidarr.Plugin.Slskd.dll \
+                   /config/plugins/Lidarr.Plugin.Slskd.pdb \
+                   /config/plugins/Lidarr.Plugin.Slskd.deps.json \
+                   /config/plugins/Lidarr.Plugin.Slskd.zip
+            mkdir -p /config/plugins/Lidarr.Plugin.Tubifarry
+            TUBIFARRY_URL=$(curl -fsSL "https://api.github.com/repos/TypNull/Tubifarry/releases/latest" \
+              | grep -o '"browser_download_url": "[^"]*net8\.0\.zip"' \
+              | sed 's/.*"\(https[^"]*\)".*/\1/')
+            curl -fsSL -o /tmp/tubifarry.zip "$TUBIFARRY_URL"
+            unzip -o /tmp/tubifarry.zip -d /config/plugins/Lidarr.Plugin.Tubifarry/
     containers:
       main:
         image:
