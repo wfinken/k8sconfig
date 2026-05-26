@@ -30,6 +30,13 @@ prometheus:
         cpu: 100m
       limits:
         memory: 1Gi
+    # Discover ServiceMonitors and PodMonitors in all namespaces regardless of labels.
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+    podMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelector: {}
+    podMonitorNamespaceSelector: {}
 
 # Skip alertmanager for local dev; flip enabled: true to bring it back.
 alertmanager:

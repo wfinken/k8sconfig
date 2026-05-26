@@ -5,7 +5,15 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
+    metrics:
+      prometheus:
+        entryPoint: metrics
     ports:
+      metrics:
+        port: 9100
+        expose:
+          default: false
+        protocol: TCP
       web:
         redirections:
           entryPoint:
