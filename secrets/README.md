@@ -11,6 +11,7 @@ Only this `README.md` is committed.
 |------|--------|-----------|
 | `grafana-admin.yaml` | Grafana admin username + password | `default` |
 | `lidarr-api-key.yaml` | Lidarr API key used by the lidarr-scan CronJob | `media` |
+| `slskd-credentials.yaml` | slskd admin creds, Soulseek network creds, and API key | `media` |
 | `repo-secret-cluster.yaml` | ArgoCD GitHub PAT (fallback if bootstrap/repo-secret.yaml is missing) | `argocd` |
 | `cloudflare-secret-cluster.yaml` | Cloudflare API token for cert-manager DNS-01 (fallback) | `cert-manager` |
 

@@ -10,6 +10,9 @@ controllers:
           SLSKD_DOWNLOADS_DIR: /downloads
           SLSKD_SLSK_LISTEN_PORT: "2234"
           SLSKD_REMOTE_CONFIGURATION: "true"
+        envFrom:
+          - secretRef:
+              name: slskd-credentials
 
 service:
   main:

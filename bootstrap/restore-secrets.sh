@@ -26,6 +26,7 @@ echo ""
 echo "=== Restoring secrets ==="
 apply_if_exists grafana-admin.yaml
 apply_if_exists lidarr-api-key.yaml
+apply_if_exists slskd-credentials.yaml
 
 # These overlap with bootstrap secrets; only apply if bootstrap files are missing.
 if [ ! -f "$REPO_ROOT/bootstrap/repo-secret.yaml" ]; then

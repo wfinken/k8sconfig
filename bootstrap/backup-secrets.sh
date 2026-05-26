@@ -36,6 +36,7 @@ echo "=== Backing up cluster secrets to $SECRETS_DIR ==="
 
 dump_secret default       grafana-admin                grafana-admin.yaml
 dump_secret media         lidarr-api-key               lidarr-api-key.yaml
+dump_secret media         slskd-credentials            slskd-credentials.yaml
 dump_secret argocd        repo-k8sconfig               repo-secret-cluster.yaml
 dump_secret cert-manager  cloudflare-api-token-secret  cloudflare-secret-cluster.yaml
 
