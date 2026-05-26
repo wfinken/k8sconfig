@@ -13,7 +13,7 @@ controllers:
             mkdir -p /config/plugins
             curl -fsSL -o /tmp/slskd-plugin.zip \
               "https://github.com/allquiet-hub/Lidarr.Plugin.Slskd/releases/latest/download/Lidarr.Plugin.Slskd.net6.0.zip"
-            unzip -o /tmp/slskd-plugin.zip -d /config/plugins/
+            unzip -o /tmp/slskd-plugin.zip -d /config/plugins/Lidarr.Plugin.Slskd/
     containers:
       main:
         image:
