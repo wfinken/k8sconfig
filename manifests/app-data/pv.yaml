@@ -102,18 +102,3 @@ spec:
   hostPath:
     path: /Volumes/Storage/k8s-data/privatebin/data
     type: DirectoryOrCreate
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: app-grampsweb-data
-spec:
-  capacity:
-    storage: 20Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: ""
-  hostPath:
-    path: /Volumes/Storage/k8s-data/grampsweb/data
-    type: DirectoryOrCreate
