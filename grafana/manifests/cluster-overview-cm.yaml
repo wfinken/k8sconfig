@@ -1937,7 +1937,7 @@ data:
               },
               "expr": "(certmanager_certificate_expiration_timestamp_seconds - time()) / 86400",
               "instant": true,
-              "legendFormat": "{{namespace}} / {{name}}",
+              "legendFormat": "{{exported_namespace}} / {{name}}",
               "refId": "A"
             }
           ],
