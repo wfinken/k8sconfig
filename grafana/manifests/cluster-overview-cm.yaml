@@ -1963,7 +1963,7 @@ data:
                 "barAlignment": 0,
                 "barWidthFactor": 0.6,
                 "drawStyle": "line",
-                "fillOpacity": 15,
+                "fillOpacity": 10,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
@@ -2001,45 +2001,11 @@ data:
               },
               "unit": "short"
             },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "limit (2 cores)"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "red",
-                      "mode": "fixed"
-                    }
-                  },
-                  {
-                    "id": "custom.lineStyle",
-                    "value": {
-                      "dash": [
-                        8,
-                        4
-                      ],
-                      "fill": "dash"
-                    }
-                  },
-                  {
-                    "id": "custom.lineWidth",
-                    "value": 1
-                  },
-                  {
-                    "id": "custom.fillOpacity",
-                    "value": 0
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 8,
-            "w": 12,
+            "w": 24,
             "x": 0,
             "y": 44
           },
@@ -2051,11 +2017,11 @@ data:
                 "max"
               ],
               "displayMode": "list",
-              "placement": "bottom",
+              "placement": "right",
               "showLegend": true
             },
             "tooltip": {
-              "hideZeros": false,
+              "hideZeros": true,
               "mode": "multi",
               "sort": "desc"
             }
@@ -2067,21 +2033,12 @@ data:
                 "type": "prometheus",
                 "uid": "${datasource}"
               },
-              "expr": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"media\",pod=~\"slskd.*\",container!=\"\",container!=\"POD\"}[5m]))",
-              "legendFormat": "{{pod}}",
+              "expr": "topk(20, sum by (namespace, pod) (rate(container_cpu_usage_seconds_total{container!=\"\",container!=\"POD\",namespace!~\"kube-system|kube-public\"}[5m])))",
+              "legendFormat": "{{namespace}} / {{pod}}",
               "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "${datasource}"
-              },
-              "expr": "sum(kube_pod_container_resource_limits{namespace=\"media\",pod=~\"slskd.*\",resource=\"cpu\"})",
-              "legendFormat": "limit (2 cores)",
-              "refId": "B"
             }
           ],
-          "title": "slskd CPU per Pod",
+          "title": "CPU per Deployment",
           "type": "timeseries"
         }
       ],
@@ -2119,5 +2076,5 @@ data:
       "timezone": "browser",
       "title": "K8s Cluster Overview",
       "uid": "k8s-cluster-overview",
-      "version": 6
+      "version": 7
     }
