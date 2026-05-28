@@ -32,3 +32,10 @@ ingress:
 persistence:
   enabled: true
   existingClaim: app-grafana-data
+
+sidecar:
+  dashboards:
+    enabled: true
+    label: grafana_dashboard
+    labelValue: "1"
+    searchNamespace: ALL
