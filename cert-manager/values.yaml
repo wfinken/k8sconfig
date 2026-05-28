@@ -30,3 +30,9 @@ cainjector:
     requests:
       cpu: 10m
       memory: 32Mi
+
+# Expose cert-manager metrics so Prometheus can scrape them.
+prometheus:
+  enabled: true
+  servicemonitor:
+    enabled: true
