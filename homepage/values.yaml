@@ -294,12 +294,12 @@ config:
             icon: trilium.png
             namespace: trilium
             app: trilium
-        - Lidarr:
-            href: https://lidarr.wfink.cc
-            description: Music Collection Manager
-            icon: lidarr.png
-            namespace: media
-            app: lidarr
+#        - Lidarr:
+#            href: https://lidarr.wfink.cc
+#            description: Music Collection Manager
+#            icon: lidarr.png
+#            namespace: media
+#            app: lidarr
         - Navidrome:
             href: https://navidrome.wfink.cc
             description: Music Streaming Server
